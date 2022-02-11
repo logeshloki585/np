@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 // libraries 
-import express from "express";
+import express, { application } from "express";
 import cors from "cors";
 import helmet from "helmet";
 
@@ -99,11 +99,20 @@ blog.post("/new_/0357947589439079079375090239", (req, res) => {
 
 
 
+const port = process.env.PORT || 4000;
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('client/build'));
+
+  app.get('*',(req,res) => {
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+  });
+}
 
 
 blog.get("/", (req, res) => res.json({ message: "Setup success" }));
 
-blog.listen(4000, () =>
+blog.listen(port, () =>
   ConnectDB()
     .then(() => console.log("Server is running "))
     .catch(() =>
