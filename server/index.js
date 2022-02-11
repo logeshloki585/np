@@ -1,11 +1,15 @@
 // Importing Env Variables for give codes
 require("dotenv").config();
 
+
+  // nodemon --exec ./node_modules/.bin/babel-node
+    // "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+
+
 // libraries 
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import path from 'path';
 
 import { BlogModel } from "./database/blog";
 
@@ -102,13 +106,13 @@ blog.post("/new_/0357947589439079079375090239", (req, res) => {
 
 const port = process.env.PORT || 4000;
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('client/build'));
+// if(process.env.NODE_ENV === 'production'){
+//   app.use(express.static('client/build'));
 
-  app.get('*',(req,res) => {
-    res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-  });
-}
+//   app.get('*',(req,res) => {
+//     res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+//   });
+// }
 
 
 blog.get("/", (req, res) => res.json({ message: "Setup success" }));
