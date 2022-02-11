@@ -2,9 +2,10 @@
 require("dotenv").config();
 
 // libraries 
-import express, { application } from "express";
+import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import path from 'path';
 
 import { BlogModel } from "./database/blog";
 
